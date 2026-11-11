@@ -1,9 +1,6 @@
 name: Build OCI Image
 
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+on: push
 
 jobs:
   build:
@@ -19,7 +16,7 @@ jobs:
       - name: Build image
         uses: redhat-actions/buildah-build@v3
         with:
-          image: my-image
+          image: libopencm3-dev-image
           tags: latest
           containerfiles: ./Containerfile
 
@@ -29,8 +26,8 @@ jobs:
             oci-archive:my-image.tar:latest
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: my-image
-          path: my-image.tar
+          name: libopencm3-dev-image
+          path: libopencm3-dev-image.tar
           retention-days: 7
