@@ -8,6 +8,7 @@ RUN apt-get update && \
     gcc-arm-none-eabi binutils-arm-none-eabi libnewlib-arm-none-eabi \
     gdb-multiarch openocd ca-certificates \
     ripgrep fd-find && \
+    ln -s $(which fdfind) /usr/local/bin/fd && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /workspace
