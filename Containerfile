@@ -10,4 +10,8 @@ RUN apt-get update && \
     ripgrep fd-find && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /workspace
+
+WORKDIR /workspace
+
 CMD ["/bin/bash"]
