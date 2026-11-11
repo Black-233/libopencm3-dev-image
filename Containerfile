@@ -1,17 +1,21 @@
+# Containerfile
+# author: melon
+
+# image base
 FROM ubuntu:24.04
 
-ENV DEBIAN_FRONTEND="noninteractive"
+ARG DEBIAN_FRONTEND=noninteractive
 
+# necessary and useful tools
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    git pkg-config bear make cmake ninja-build python3 bash curl clangd clang-format \
+    git pkg-config bear make cmake ninja-build python3 bash curl \
     gcc-arm-none-eabi binutils-arm-none-eabi libnewlib-arm-none-eabi \
     gdb-multiarch openocd ca-certificates \
+    clangd clang-format \
     ripgrep fd-find && \
-    ln -s $(which fdfind) /usr/local/bin/fd && \
+    ln -sf "$(which fdfind)" /usr/local/bin/fd && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /workspace
 
 WORKDIR /workspace
 
