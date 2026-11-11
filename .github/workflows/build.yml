@@ -1,0 +1,36 @@
+name: Build OCI Image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build image
+        uses: redhat-actions/buildah-build@v3
+        with:
+          image: my-image
+          tags: latest
+          containerfiles: ./Containerfile
+
+      - name: Export image
+        run: |
+          buildah push my-image:latest \
+            oci-archive:my-image.tar:latest
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-image
+          path: my-image.tar
+          retention-days: 7
