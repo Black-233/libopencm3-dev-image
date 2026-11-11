@@ -7,7 +7,7 @@ RUN apt-get update && \
     git pkg-config bear make cmake ninja-build python3 bash curl clangd \
     gcc-arm-none-eabi binutils-arm-none-eabi libnewlib-arm-none-eabi \
     gdb-multiarch openocd ca-certificates \
-    ripgrep fd && \
+    ripgrep fd-find && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 CMD ["/bin/bash"]
