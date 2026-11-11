@@ -23,7 +23,7 @@ jobs:
       - name: Export image
         run: |
           buildah push libopencm3-dev-image:latest \
-            oci-archive:libopencm3-dev-image.tar:latest
+            oci-archive:libopencm3-dev-image.tar:libopencm3-dev:latest
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
